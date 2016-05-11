@@ -1,3 +1,5 @@
+#include "main.hh"
+
 #include <iostream>
 
 using namespace std;
