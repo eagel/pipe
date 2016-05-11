@@ -1,5 +1,5 @@
 AC_PREREQ(2.59)
-AC_INIT(pipe, 0.0.1)
+AC_INIT(pipe, 0.0.1, eagel@me.com)
 
 
 AC_CANONICAL_SYSTEM

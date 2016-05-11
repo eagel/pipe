@@ -3,3 +3,6 @@
 /.project
 /.settings/
 /src/.deps/
+/src/pipe
+*.o
+*.in
