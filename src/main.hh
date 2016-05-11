@@ -3,6 +3,7 @@
 
 #include "config.h"
 
+#include "exception.hh"
 #include "arguments.hh"
 
 
