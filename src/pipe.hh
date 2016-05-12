@@ -7,9 +7,16 @@ namespace pipe {
 
 class pipe {
 public:
-	pipe(int argc, char *argv[]);
+	static pipe * create(int argc, char *argv[]);
+public:
+	virtual ~pipe();
 
-	int execute();
+	virtual int execute() = 0;
+protected:
+	pipe();
+private:
+	pipe(const pipe &) = delete;
+	pipe & operator=(const pipe &) = delete;
 };
 
 } /* namespace pipe */

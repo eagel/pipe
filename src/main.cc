@@ -6,10 +6,10 @@ using namespace std;
 
 int main(int argc, char *argv[]) {
 	try {
-		pipe::pipe p(argc, argv);
-		return p.execute();
+		pipe::pipe *p = pipe::pipe::create(argc, argv);
+		return p->execute();
 	} catch (pipe::exception &e) {
-		// TODO
+		cout << e.message() << endl;
 		return -1;
 	}
 }
