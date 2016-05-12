@@ -53,11 +53,11 @@ void print_usage(std::stringstream &ss) {
 	ss << "Options:" << std::endl;
 
 	ss << "\t-u, --upstream [-|+]<upstream>" << std::endl
-			<< "\t\t: the upstream output, the '+' is mirror, the '-' is capture, the default is mirror standard out."
+			<< "\t\t: the upstream endpoint, the '+' is mirror, the '-' is capture, the default is mirror standard out."
 			<< std::endl;
 
 	ss << "\t-d, --downstream [-|+]<downstream>" << std::endl
-			<< "\t\t: the downstream output, the '+' is mirror, the '-' is capture, the default is mirror standard error."
+			<< "\t\t: the downstream endpoint, the '+' is mirror, the '-' is capture, the default is mirror standard error."
 			<< std::endl;
 
 	ss << "Endpoint:" << std::endl;
