@@ -37,16 +37,38 @@ void print_name(std::stringstream &ss) {
 }
 
 void print_usage(std::stringstream &ss) {
-	ss << "Usage: pipe left_endpoint mode right_endpoint" << std::endl;
-	ss << "\tleft_endpoint\t\t\t: the left end point for pipe." << std::endl;
-	ss << "\tright_endpoint\t\t\t: the right end point for pipe." << std::endl;
-	ss
-			<< "\tmode\t\t\t\t: the value should be '/' for simplex or '//' for duplex."
+	ss << "Usage: pipe [options] <left_endpoint> <mode> <right_endpoint>"
 			<< std::endl;
-	ss << "\t-u, --upstream <upstream>\t: the upstream mirror output, the default is standard out."
+
+	ss << "\tleft_endpoint" << std::endl << "\t\t: the left end point for pipe."
 			<< std::endl;
-	ss << "\t-d, --downstream <downstream>\t: the downstream mirror output, the default is standard error."
+
+	ss << "\tright_endpoint" << std::endl
+			<< "\t\t: the right end point for pipe." << std::endl;
+
+	ss << "\tmode" << std::endl
+			<< "\t\t: the value should be '/' for simplex or '//' for duplex."
 			<< std::endl;
+
+	ss << "Options:" << std::endl;
+
+	ss << "\t-u, --upstream [-|+]<upstream>" << std::endl
+			<< "\t\t: the upstream output, the '+' is mirror, the '-' is capture, the default is mirror standard out."
+			<< std::endl;
+
+	ss << "\t-d, --downstream [-|+]<downstream>" << std::endl
+			<< "\t\t: the downstream output, the '+' is mirror, the '-' is capture, the default is mirror standard error."
+			<< std::endl;
+
+	ss << "Endpoint:" << std::endl;
+
+	ss << "\t<hostname>[:port]\t\t: tcp endpoint." << std::endl;
+
+	ss << "\t=[hostname][:port]\t\t: tcp listen endpoint." << std::endl;
+
+	ss << "\t@<filedescriptor>\t\t: I/O endpoint." << std::endl;
+
+	ss << "\t%<path>\t\t\t\t: file endpoint." << std::endl;
 }
 
 pipe * pipe::create(int argc, char *argv[]) {
@@ -55,8 +77,8 @@ pipe * pipe::create(int argc, char *argv[]) {
 	args.configure("endpoint_l", "l", arguments::TYPE_VALUE);
 	args.configure("mode", "m", arguments::TYPE_VALUE);
 	args.configure("endpoint_r", "r", arguments::TYPE_VALUE);
-	args.configure("upstream", "u", arguments::TYPE_CONFIG, "@1");
-	args.configure("downstream", "d", arguments::TYPE_CONFIG, "@2");
+	args.configure("upstream", "u", arguments::TYPE_CONFIG, "+@1");
+	args.configure("downstream", "d", arguments::TYPE_CONFIG, "+@2");
 
 	args.parse(argc, argv);
 
