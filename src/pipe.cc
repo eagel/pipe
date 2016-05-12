@@ -7,11 +7,14 @@
 #include <string>
 
 #include "arguments.hh"
+#include "endpoint.hh"
 
 namespace pipe {
 
 class pipe_i: public pipe {
 	arguments _args;
+	endpoint *_endpoint_left;
+	endpoint *_endpoint_right;
 public:
 	pipe_i(const arguments &args);
 	pipe_i(arguments &&args);
@@ -62,13 +65,13 @@ void print_usage(std::stringstream &ss) {
 
 	ss << "Endpoint:" << std::endl;
 
-	ss << "\t<hostname>[:port]\t\t: tcp endpoint." << std::endl;
+	ss << "\t[^]<hostname>[:port]\t\t: tcp endpoint." << std::endl;
 
 	ss << "\t=[hostname][:port]\t\t: tcp listen endpoint." << std::endl;
 
 	ss << "\t@<filedescriptor>\t\t: I/O endpoint." << std::endl;
 
-	ss << "\t%<path>\t\t\t\t: file endpoint." << std::endl;
+	ss << "\t%<filepath>\t\t\t\t: file path endpoint." << std::endl;
 }
 
 pipe * pipe::create(int argc, char *argv[]) {
@@ -124,17 +127,28 @@ pipe * pipe::create(int argc, char *argv[]) {
 }
 
 pipe_i::pipe_i(const arguments &args) :
-		_args(args) {
+		_args(args), _endpoint_left(nullptr), _endpoint_right(nullptr) {
 }
 
 pipe_i::pipe_i(arguments &&args) :
-		_args(std::move(args)) {
+		_args(std::move(args)), _endpoint_left(nullptr), _endpoint_right(
+				nullptr) {
 }
 
 pipe_i::~pipe_i() {
+	if (_endpoint_left) {
+		delete _endpoint_left;
+		_endpoint_left = nullptr;
+	}
+	if (_endpoint_right) {
+		delete _endpoint_right;
+		_endpoint_right = nullptr;
+	}
 }
 
 int pipe_i::execute() {
+	_endpoint_left = endpoint::create(_args["endpoint_l"]);
+	_endpoint_left = endpoint::create(_args["endpoint_r"]);
 	// TODO
 	return 0;
 }
