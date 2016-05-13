@@ -71,7 +71,7 @@ void print_usage(std::stringstream &ss) {
 
 	ss << "\t@<filedescriptor>\t\t: I/O endpoint." << std::endl;
 
-	ss << "\t%<filepath>\t\t\t\t: file path endpoint." << std::endl;
+	ss << "\t%<filepath>\t\t\t: file path endpoint." << std::endl;
 }
 
 pipe * pipe::create(int argc, char *argv[]) {
