@@ -147,8 +147,10 @@ pipe_i::~pipe_i() {
 }
 
 int pipe_i::execute() {
-	_endpoint_left = endpoint::create(_args["endpoint_l"]);
-	_endpoint_left = endpoint::create(_args["endpoint_r"]);
+	bool duplex = (std::string("//") != std::string(_args["mode"]));
+
+	_endpoint_left = endpoint::create(_args["endpoint_l"], true);
+	_endpoint_left = endpoint::create(_args["endpoint_r"], duplex);
 	// TODO
 	return 0;
 }

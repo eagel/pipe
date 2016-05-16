@@ -9,10 +9,7 @@ class endpoint {
 public:
 	virtual ~endpoint();
 
-	static endpoint * create(const char *name);
-
-	virtual int read(unsigned char *data, int length) = 0;
-	virtual int write(unsigned char *data, int length) = 0;
+	static endpoint * create(const char *name, bool create_stream);
 
 protected:
 	endpoint();
@@ -22,5 +19,7 @@ private:
 };
 
 } /* namespace pipe */
+
+#include "endpoint_tcp_client.hh"
 
 #endif /* PIPE_ENDPOINT_HH_ */
