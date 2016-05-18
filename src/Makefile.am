@@ -7,5 +7,6 @@ pipe_SOURCES=	main.cc \
 				arguments.cc arguments.hh\
 				endpoint.cc endpoint.hh\
 				endpoint_tcp_client.cc endpoint_tcp_client.hh\
+				endpoint_tcp_server.cc endpoint_tcp_server.hh\
 				stream.cc stream.hh
 

@@ -20,8 +20,8 @@ endpoint::endpoint() {
 endpoint * endpoint::create(const char *name, bool create_stream) {
 	std::string n(name);
 	if (0 == n.find(SCHEMA_TCP_SERVER)) {
-		// TODO
-		throw exception("the TCP server endpoint is not supported");
+		return endpoint_tcp_server::create(n.substr(1, n.size()).c_str(),
+						create_stream);
 	}
 	if (0 == n.find(SCHEMA_FILE_DESCRIPTOR)) {
 		// TODO

@@ -1,5 +1,6 @@
 #include "endpoint_tcp_client.hh"
 
+#include <string>
 #include <iostream> // FIXME
 
 namespace pipe {

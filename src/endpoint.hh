@@ -21,5 +21,6 @@ private:
 } /* namespace pipe */
 
 #include "endpoint_tcp_client.hh"
+#include "endpoint_tcp_server.hh"
 
 #endif /* PIPE_ENDPOINT_HH_ */
