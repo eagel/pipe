@@ -9,9 +9,9 @@ class endpoint_tcp_client: public endpoint {
 public:
 	virtual ~endpoint_tcp_client();
 
-	static endpoint_tcp_client * create(const char *name, bool create_stream);
+	static endpoint_tcp_client * create(const char *name, bool positive);
 protected:
-	endpoint_tcp_client(const char *name, bool create_stream);
+	endpoint_tcp_client(const char *name, bool positive);
 private:
 	endpoint_tcp_client(const endpoint_tcp_client &) = delete;
 	endpoint_tcp_client & operator=(const endpoint_tcp_client &) = delete;

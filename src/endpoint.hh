@@ -9,7 +9,7 @@ class endpoint {
 public:
 	virtual ~endpoint();
 
-	static endpoint * create(const char *name, bool create_stream);
+	static endpoint * create(const char *name, bool positive);
 
 protected:
 	endpoint();

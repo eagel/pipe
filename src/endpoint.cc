@@ -17,11 +17,11 @@ endpoint::~endpoint() {
 endpoint::endpoint() {
 }
 
-endpoint * endpoint::create(const char *name, bool create_stream) {
+endpoint * endpoint::create(const char *name, bool positive) {
 	std::string n(name);
 	if (0 == n.find(SCHEMA_TCP_SERVER)) {
 		return endpoint_tcp_server::create(n.substr(1, n.size()).c_str(),
-						create_stream);
+						positive);
 	}
 	if (0 == n.find(SCHEMA_FILE_DESCRIPTOR)) {
 		// TODO
@@ -33,9 +33,9 @@ endpoint * endpoint::create(const char *name, bool create_stream) {
 	}
 	if (0 == n.find(SCHEMA_TCP_CLIENT)) {
 		return endpoint_tcp_client::create(n.substr(1, n.size()).c_str(),
-				create_stream);
+				positive);
 	} else {
-		return endpoint_tcp_client::create(name, create_stream);
+		return endpoint_tcp_client::create(name, positive);
 	}
 }
 

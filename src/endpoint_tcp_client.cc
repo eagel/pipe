@@ -9,24 +9,24 @@ class endpoint_tcp_client_i: public endpoint_tcp_client {
 	std::string _host;
 	unsigned short _port;
 public:
-	endpoint_tcp_client_i(const char *name, bool create_stream);
+	endpoint_tcp_client_i(const char *name, bool positive);
 	virtual ~endpoint_tcp_client_i();
 };
 
-endpoint_tcp_client::endpoint_tcp_client(const char *name, bool create_stream) {
+endpoint_tcp_client::endpoint_tcp_client(const char *name, bool positive) {
 }
 
 endpoint_tcp_client::~endpoint_tcp_client() {
 }
 
 endpoint_tcp_client * endpoint_tcp_client::create(const char *name,
-		bool create_stream) {
-	return new endpoint_tcp_client_i(name, create_stream);
+		bool positive) {
+	return new endpoint_tcp_client_i(name, positive);
 }
 
 endpoint_tcp_client_i::endpoint_tcp_client_i(const char *name,
-		bool create_stream) :
-		endpoint_tcp_client(name, create_stream), _host(""), _port(0) {
+		bool positive) :
+		endpoint_tcp_client(name, positive), _host(""), _port(0) {
 	// TODO
 }
 
