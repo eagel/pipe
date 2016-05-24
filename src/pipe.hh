@@ -1,9 +1,9 @@
-#ifndef PIPE_PIPE_HH_
-#define PIPE_PIPE_HH_
+#ifndef PIPE_NS_PIPE_HH_
+#define PIPE_NS_PIPE_HH_
 
 #include "exception.hh"
 
-namespace pipe {
+namespace pipe_ns {
 
 class pipe {
 public:
@@ -19,6 +19,6 @@ private:
 	pipe & operator=(const pipe &) = delete;
 };
 
-} /* namespace pipe */
+} /* namespace pipe_ns */
 
-#endif /* PIPE_PIPE_HH_ */
+#endif /* PIPE_NS_PIPE_HH_ */

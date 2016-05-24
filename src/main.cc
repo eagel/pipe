@@ -6,9 +6,9 @@ using namespace std;
 
 int main(int argc, char *argv[]) {
 	try {
-		pipe::pipe *p = pipe::pipe::create(argc, argv);
+		pipe_ns::pipe *p = pipe_ns::pipe::create(argc, argv);
 		return p->execute();
-	} catch (pipe::exception &e) {
+	} catch (pipe_ns::exception &e) {
 		cout << e.message() << endl;
 		return -1;
 	}

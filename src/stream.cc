@@ -1,6 +1,6 @@
 #include "stream.hh"
 
-namespace pipe {
+namespace pipe_ns {
 
 stream::stream() {
 }
@@ -13,4 +13,4 @@ stream * stream::create(int buffer_size) {
 	return nullptr;
 }
 
-} /* namespace pipe */
+} /* namespace pipe_ns */

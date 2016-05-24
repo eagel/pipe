@@ -1,9 +1,9 @@
-#ifndef PIPE_ENDPOINT_TCP_SERVER_HH_
-#define PIPE_ENDPOINT_TCP_SERVER_HH_
+#ifndef PIPE_NS_ENDPOINT_TCP_SERVER_HH_
+#define PIPE_NS_ENDPOINT_TCP_SERVER_HH_
 
 #include "endpoint.hh"
 
-namespace pipe {
+namespace pipe_ns {
 
 class endpoint_tcp_server: public endpoint {
 public:
@@ -17,6 +17,6 @@ private:
 	endpoint_tcp_server & operator=(const endpoint_tcp_server &) = delete;
 };
 
-} /* namespace pipe */
+} /* namespace pipe_ns */
 
-#endif /* PIPE_ENDPOINT_TCP_SERVER_HH_ */
+#endif /* PIPE_NS_ENDPOINT_TCP_SERVER_HH_ */

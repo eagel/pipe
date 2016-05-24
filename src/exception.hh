@@ -1,7 +1,7 @@
-#ifndef PIPE_EXCEPTION_HH_
-#define PIPE_EXCEPTION_HH_
+#ifndef PIPE_NS_EXCEPTION_HH_
+#define PIPE_NS_EXCEPTION_HH_
 
-namespace pipe {
+namespace pipe_ns {
 
 class exception {
 	char * _message;
@@ -17,6 +17,6 @@ public:
 	virtual const char * message();
 };
 
-} /* namespace pipe */
+} /* namespace pipe_ns */
 
-#endif /* PIPE_EXCEPTION_HH_ */
+#endif /* PIPE_NS_EXCEPTION_HH_ */

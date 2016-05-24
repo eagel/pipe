@@ -4,7 +4,7 @@
 
 using namespace std;
 
-namespace pipe {
+namespace pipe_ns {
 exception::exception() :
 		_message(nullptr) {
 }
@@ -47,4 +47,4 @@ const char * exception::message() {
 		return _message;
 	}
 }
-} /* namespace pipe */
+} /* namespace pipe_ns */

@@ -15,7 +15,7 @@ class arguments_i {
 public:
 	string _name;
 	vector<string> _names;
-	map<string, pipe::arguments::type_t> _types;
+	map<string, pipe_ns::arguments::type_t> _types;
 	map<string, string> _aliases;
 	map<string, string> _values;
 	map<string, string> _defaults;
@@ -29,7 +29,7 @@ public:
 
 }
 
-namespace pipe {
+namespace pipe_ns {
 
 const char * const arguments::TRUE = "true";
 const char * const arguments::FALSE = "false";
@@ -235,4 +235,4 @@ const char * arguments::errorMessage(int index) const {
 	return arguments_i::cast(_implementation)->_errorsMessages.at(index).c_str();
 }
 
-} /* namespace ea */
+} /* namespace pipe_ns */

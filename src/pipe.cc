@@ -9,7 +9,7 @@
 #include "arguments.hh"
 #include "endpoint.hh"
 
-namespace pipe {
+namespace pipe_ns {
 
 class pipe_i: public pipe {
 	arguments _args;
@@ -155,4 +155,4 @@ int pipe_i::execute() {
 	return 0;
 }
 
-} /* namespace pipe */
+} /* namespace pipe_ns */

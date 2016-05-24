@@ -4,7 +4,7 @@
 
 #include <exception.hh>
 
-namespace pipe {
+namespace pipe_ns {
 
 std::string SCHEMA_TCP_CLIENT = "^";
 std::string SCHEMA_TCP_SERVER = "=";
@@ -39,4 +39,4 @@ endpoint * endpoint::create(const char *name, bool positive) {
 	}
 }
 
-} /* namespace pipe */
+} /* namespace pipe_ns */

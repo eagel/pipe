@@ -1,7 +1,7 @@
-#ifndef PIPE_STREAM_HH_
-#define PIPE_STREAM_HH_
+#ifndef PIPE_NS_STREAM_HH_
+#define PIPE_NS_STREAM_HH_
 
-namespace pipe {
+namespace pipe_ns {
 
 class stream {
 public:
@@ -15,6 +15,6 @@ private:
 	stream & operator=(const stream &) = delete;
 };
 
-} /* namespace pipe */
+} /* namespace pipe_ns */
 
-#endif /* PIPE_STREAM_HH_ */
+#endif /* PIPE_NS_STREAM_HH_ */

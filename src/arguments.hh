@@ -1,7 +1,7 @@
-#ifndef PIPE_ARGUMENTS_HH_
-#define PIPE_ARGUMENTS_HH_
+#ifndef PIPE_NS_ARGUMENTS_HH_
+#define PIPE_NS_ARGUMENTS_HH_
 
-namespace pipe {
+namespace pipe_ns {
 
 class arguments {
 	void * _implementation;
@@ -44,6 +44,6 @@ public:
 	const char * errorMessage(int index) const;
 };
 
-} /* namespace pipe */
+} /* namespace pipe_ns */
 
-#endif /* PIPE_ARGUMENTS_HH_ */
+#endif /* PIPE_NS_ARGUMENTS_HH_ */

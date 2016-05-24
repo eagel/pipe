@@ -3,7 +3,7 @@
 #include <string>
 #include <iostream> // FIXME
 
-namespace pipe {
+namespace pipe_ns {
 
 class endpoint_tcp_client_i: public endpoint_tcp_client {
 	std::string _host;
@@ -33,4 +33,4 @@ endpoint_tcp_client_i::endpoint_tcp_client_i(const char *name,
 endpoint_tcp_client_i::~endpoint_tcp_client_i() {
 }
 
-} /* namespace pipe */
+} /* namespace pipe_ns */
