@@ -1,13 +1,15 @@
-#include "pipe.hh"
-
-#include "config.h"
-
-#include <utility>
+#include <arguments.hh>
+#include <config.h>
+#include <endpoint.hh>
+#include <pipe.hh>
+#include <sys/signal.h>
+#include <__mutex_base>
+#include <future>
+#include <map>
 #include <sstream>
 #include <string>
-
-#include "arguments.hh"
-#include "endpoint.hh"
+#include <type_traits>
+#include <vector>
 
 namespace pipe_ns {
 
@@ -15,6 +17,7 @@ class pipe_i: public pipe {
 	arguments _args;
 	endpoint *_endpoint_left;
 	endpoint *_endpoint_right;
+	std::promise<int> _promise;
 public:
 	pipe_i(const arguments &args);
 	pipe_i(arguments &&args);
@@ -23,10 +26,40 @@ public:
 
 	virtual int execute();
 
+	void on_signal(int s);
+
 private:
 	pipe_i(const pipe_i &) = delete;
 	pipe_i & operator=(const pipe_i &) = delete;
 };
+
+/*
+ * the executing pipes
+ */
+std::vector<pipe_i *> pipes;
+/*
+ * record previous signal handler
+ */
+std::map<int, void (*)(int)> pre_signal_handlers;
+/*
+ * signal mutex
+ */
+std::mutex signal_mutex;
+/*
+ * the signal handler is registered
+ */
+bool signal_registered = false;
+
+void signal_handler(int s) {
+
+	for (pipe_i * p : pipes) {
+		p->on_signal(s);
+	}
+
+	if (nullptr != pre_signal_handlers[s]) {
+		pre_signal_handlers[s](s);
+	}
+}
 
 pipe::pipe() {
 }
@@ -127,12 +160,12 @@ pipe * pipe::create(int argc, char *argv[]) {
 }
 
 pipe_i::pipe_i(const arguments &args) :
-		_args(args), _endpoint_left(nullptr), _endpoint_right(nullptr) {
+		_args(args), _endpoint_left(nullptr), _endpoint_right(nullptr), _promise() {
 }
 
 pipe_i::pipe_i(arguments &&args) :
 		_args(std::move(args)), _endpoint_left(nullptr), _endpoint_right(
-				nullptr) {
+				nullptr), _promise() {
 }
 
 pipe_i::~pipe_i() {
@@ -151,8 +184,50 @@ int pipe_i::execute() {
 
 	_endpoint_left = endpoint::create(_args["endpoint_l"], true);
 	_endpoint_left = endpoint::create(_args["endpoint_r"], duplex);
+
 	// TODO
+
+	{
+		std::lock_guard<std::mutex> lock(signal_mutex);
+		if (!signal_registered) {
+			signal_registered = true;
+
+			// SIGHUP
+			void (*pre_signal_handler)(int) = signal(SIGHUP, signal_handler);
+			if (SIG_ERR == pre_signal_handler) {
+				throw exception("error register signal handler for SIGHUP");
+			} else {
+				pre_signal_handlers[SIGHUP] = pre_signal_handler;
+			}
+			// SIGINT
+			pre_signal_handler = signal(SIGINT, signal_handler);
+			if (SIG_ERR == pre_signal_handler) {
+				throw exception("error register signal handler for SIGINT");
+			} else {
+				pre_signal_handlers[SIGINT] = pre_signal_handler;
+			}
+			// SIGTERM
+			pre_signal_handler = signal(SIGTERM, signal_handler);
+			if (SIG_ERR == pre_signal_handler) {
+				throw exception("error register signal handler for SIGTERM");
+			} else {
+				pre_signal_handlers[SIGTERM] = pre_signal_handler;
+			}
+
+			pipes.push_back(this);
+		}
+	}
+
+	std::future<int> f = _promise.get_future();
+	int s = f.get();
+
+	// TODO release
+
 	return 0;
+}
+
+void pipe_i::on_signal(int s) {
+	_promise.set_value(s);
 }
 
 } /* namespace pipe_ns */
